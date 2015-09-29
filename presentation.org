@@ -1,0 +1,152 @@
+* Have you ever been in this situation?
+
+  I have some sweet snippets of code to share with my team that save
+  time and effort, so I paste them in chat, or put them in a gist, or
+  a wiki. Yay!
+
+* Three months later.....
+
+  Everything is garbage
+
+* Sharing is garbage
+
+  Oh yeah, I moved it over from the wiki to a gist, let me email it
+  to you so you can paste it into your init.el
+
+* Dependencies are garbage
+
+  Oops, you'll need to upgrade library-x.el to version 2.0 before this
+  will compile. Until then, your startup is borked.
+
+* Quality is garbage
+
+  Well I installed the latest version like you said, but now I'm
+  getting cryptic elisp errors every time I hit the `q` key :/
+
+  Oh! Well, grab the one from Alice's laptop. Works there...
+
+* Remedy: Treat it like real software!
+
+  That's what it is after all.
+
+* Real Software
+
+  * modular & distributable
+  * tested and regression tested
+
+* -
+
+  /TDD in Emacs/
+  @cowboyd
+  Emacs ATX, September 29th 2015
+
+* My particular problem
+
+  We're in the middle of upgrading an application from rails 2 to
+  rails 3.
+
+  We want to be able to be able to quickly toggle between rails 2 and
+  rails 3 within the same application, and re-run the same test again:
+
+  - hackity hack hack
+  - run tests in rails 3
+  - run test in rails 2
+  - hackity hack
+  - run tests in rails 2
+  - run tests in rails 3
+
+  Extend minitest mode to switch modes, and rerun the last test
+
+* Development Environment
+
+  * create your package
+  * set project up with Cask
+  * setup test harness
+
+* Create the Package file
+
+  * create [[file:switch-and-run.el][switch-and-run.el]]
+  * make sure library headers are configured properly
+    see [[info:elisp#Library%20Headers][info:elisp#Library Headers]]
+
+
+* Cask
+
+Like Bundler, Maven, Pip, NPM and friends, it resolves, fetches and
+installs dependencies.
+
+$ brew install cask
+$ cask init --dev
+
+* Caskfile
+
+Anatomy of a Cask file
+#+BEGIN_SRC emacs-lis
+(source gnu)
+(source melpa)
+
+(package-file "switch-and-run.el")
+
+(development
+ (depends-on "f")
+ (depends-on "ecukes")
+ (depends-on "ert-runner")
+ (depends-on "el-mock"))
+#+END_SRC
+
+* Caskfile
+
+ Be sure to replace TODO with your package file name in your
+ [[file:Cask::(package-file%20TODO)][Cask file]]
+
+* Cask
+
+  $ cask install
+
+  Installs all your dependencies, and the dependecies of your
+  dependencies into the ./cask directory. This keeps them apart from
+  your normal emacs installation.
+
+  $ cask package
+
+  Builds your package into an installable archive that can will also
+  install and update dependencies.
+
+* Setup your Test harness
+
+  $ touch tests.el
+  $ cask exec ert-runner tests.el
+
+
+* First Trivial Test
+
+#+BEGIN_SRC emacs-lisp
+(ert-deftest one-equal-one-but-not-two ()
+  (should (equal 1 1))
+  (should-not (equal 2 1)))
+#+END_SRC
+#+RESULTS:
+: one-equal-one-but-not-two
+
+Run in Emacs, or run in test command line test harness!
+
+* Lisp assertions are pretty cool
+
+Turns out that elisp is pretty interesting to test because all it
+needs is (should) and (should-not)
+
+* Implement Tests to your satisfaction
+
+Unfortunately, for my particular problem, testing was a bit of a pain
+since the mocking and stubbing library can't actually stub with a
+function.
+
+But we'll just put some fluff into [[file:tests.el][tests.el]]
+
+
+
+* Get your tests runing on travis!
+
+  * Create a [[file:Makefile][Makefile]]
+  * implement the emacs travis recipe here recipe here
+    https://github.com/rolandwalker/emacs-travis
