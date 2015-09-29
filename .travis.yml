@@ -130,6 +130,10 @@ install:
         sudo apt-get -qq install emacs-snapshot-el;
     fi
 
+  - curl -fsSkL https://raw.github.com/cask/cask/master/go | python
+  - export PATH=$HOME/.cask/bin:$PATH
+  - cask install
+
 before_script:
   - if [ "$EMACS" = 'emacs-snapshot' ]; then
         make downloads-latest;
@@ -137,9 +141,6 @@ before_script:
         make downloads;
     fi
 
-  - curl -fsSkL https://raw.github.com/cask/cask/master/go | python
-  - export PATH=$HOME/.cask/bin:$PATH
-  - cask install
 
 ###
 ### the actual build/test command
