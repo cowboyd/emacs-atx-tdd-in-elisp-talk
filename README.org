@@ -1,11 +1,4 @@
-* This Slide Intentially Left Blank
-
-
-
-  cowboyd@frontside.io
-
-  @cowboyd
-
+[[https://travis-ci.org/cowboyd/emacs-atx-tdd-in-elisp-talk.svg?branch=master]]
 * Have you ever been in this situation?
 
   I have some sweet snippets of code to share with my team that save
