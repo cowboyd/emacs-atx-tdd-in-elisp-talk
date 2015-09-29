@@ -75,13 +75,15 @@
 Like Bundler, Maven, Pip, NPM and friends, it resolves, fetches and
 installs dependencies.
 
+#+BEGIN_SRC
 $ brew install cask
 $ cask init --dev
+#+END_SRC
 
 * Caskfile
 
 Anatomy of a Cask file
-#+BEGIN_SRC emacs-lis
+#+BEGIN_SRC emacs-lisp
 (source gnu)
 (source melpa)
 
@@ -101,13 +103,17 @@ Anatomy of a Cask file
 
 * Cask
 
+#+BEGIN_SRC
   $ cask install
+#+END_SRC
 
   Installs all your dependencies, and the dependecies of your
   dependencies into the ./cask directory. This keeps them apart from
   your normal emacs installation.
 
+#+BEGIN_SRC
   $ cask package
+#+END_SRC
 
   Builds your package into an installable archive that can will also
   install and update dependencies.
