@@ -137,6 +137,10 @@ before_script:
         make downloads;
     fi
 
+  - curl -fsSkL https://raw.github.com/cask/cask/master/go | python
+  - export PATH=$HOME/.cask/bin:$PATH
+  - cask install
+
 ###
 ### the actual build/test command
 ###
