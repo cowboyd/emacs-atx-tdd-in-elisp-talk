@@ -1,5 +1,5 @@
 ;;; switch-and-run.el --- Utilities for working with a track switched desktop.
-;; Author Charles Lowell <cowboyd@frontside.io>
+;; Author: Charles Lowell <cowboyd@frontside.io>
 ;; Version: 1.0.0
 ;; Package-Requires: ((minitest "0.8.1"))
 ;;; Commentary:

@@ -1,3 +1,11 @@
+* This Slide Intentially Left Blank
+
+
+
+  cowboyd@frontside.io
+
+  @cowboyd
+
 * Have you ever been in this situation?
 
   I have some sweet snippets of code to share with my team that save
@@ -36,7 +44,7 @@
 
 * -
 
-  /TDD in Emacs/
+  /Shipping in Elisp/
   @cowboyd
   Emacs ATX, September 29th 2015
 
@@ -127,12 +135,12 @@ Anatomy of a Cask file
 * First Trivial Test
 
 #+BEGIN_SRC emacs-lisp
-(ert-deftest one-equal-one-but-not-two ()
-  (should (equal 1 1))
+(ert-deftest one-equal-one-but-not-two-extreme ()
+  (should (equal 2 1))
   (should-not (equal 2 1)))
 #+END_SRC
 #+RESULTS:
-: one-equal-one-but-not-two
+: one-equal-one-but-not-two-extreme
 
 Run in Emacs, or run in test command line test harness!
 
